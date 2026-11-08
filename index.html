@@ -92,7 +92,19 @@ body {
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
-
+<meta name='apple-mobile-web-app-capable' content='yes'>
+<meta name='mobile-web-app-capable' content='yes'>
+<meta name='apple-mobile-web-app-status-bar-style' content='black'>
+<meta name='apple-mobile-web-app-title' content='Sambal Empire'>
+<meta name='theme-color' content='#2b1a10'>
+<style>
+html,body{background:#2b1a10;overscroll-behavior:none;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+#rotate{display:none;position:fixed;inset:0;z-index:99;background:#2b1a10;color:#fbeeda;font:600 20px/1.45 -apple-system,system-ui,sans-serif;align-items:center;justify-content:center;text-align:center;padding:24px}
+#rotate b{display:block;font-size:64px;line-height:1;margin-bottom:16px;color:#e0603a}
+#rotate small{display:block;margin-top:8px;font-weight:400;opacity:.75;font-size:16px}
+@media (orientation:portrait) and (max-width:900px){#rotate{display:flex}}
+</style>
+<script>addEventListener('DOMContentLoaded',function(){var d=document.createElement('div');d.id='rotate';d.innerHTML='<div><b>&#x21bb;</b>Pusing telefon melintang dulu, baru boleh main.<small>Rotate your phone to landscape to play.</small></div>';document.body.appendChild(d);});</script>
 	</head>
 	<body>
 		<canvas id="canvas">
@@ -111,7 +123,7 @@ body {
 
 		<script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":1291684,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":1296020,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
 
