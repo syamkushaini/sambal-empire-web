@@ -212,7 +212,10 @@ const engine = new Engine(GODOT_CONFIG);
 		}
 	} else {
 		setStatusMode('progress');
+		const desktop = window.matchMedia('(pointer:fine)').matches && !('ontouchstart' in window) && Math.max(screen.width, screen.height) >= 1000;
+		if (desktop) { GODOT_CONFIG.fileSizes['index.desktop.pck'] = 1340625; }
 		engine.startGame({
+			'mainPack': desktop ? 'index.desktop.pck' : 'index.pck',
 			'onProgress': function (current, total) {
 				if (current > 0 && total > 0) {
 					statusProgress.value = current;
