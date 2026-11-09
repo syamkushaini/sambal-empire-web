@@ -102,10 +102,8 @@ html,body{background:#2b1a10;overscroll-behavior:none;touch-action:none;-webkit-
 #rotate{display:none;position:fixed;inset:0;z-index:99;background:#2b1a10;color:#fbeeda;font:600 20px/1.45 -apple-system,system-ui,sans-serif;align-items:center;justify-content:center;text-align:center;padding:24px}
 #rotate b{display:block;font-size:64px;line-height:1;margin-bottom:16px;color:#e0603a}
 #rotate small{display:block;margin-top:8px;font-weight:400;opacity:.75;font-size:16px}
-#canvas{position:absolute!important;top:50%!important;left:50%!important;transform:translate(-50%,-50%)}
 @media (orientation:portrait) and (max-width:900px){#rotate{display:flex}}
 </style>
-<script>window.__sambalViewCap=function(){var MAX_W=960,MAX_H=460;return [Math.min(window.innerWidth,MAX_W),Math.min(window.innerHeight,MAX_H)];};</script>
 <script>addEventListener('DOMContentLoaded',function(){var d=document.createElement('div');d.id='rotate';d.innerHTML='<div><b>&#x21bb;</b>Pusing telefon melintang dulu, baru boleh main.<small>Rotate your phone to landscape to play.</small></div>';document.body.appendChild(d);});</script>
 <script>(function(){var ctxs=[];window.__sambalCtxs=ctxs;var A=window.AudioContext||window.webkitAudioContext;if(A){var P=function(a,b){var c=new A(a,b);ctxs.push(c);return c};P.prototype=A.prototype;window.AudioContext=P;window.webkitAudioContext=P;}try{if(navigator.audioSession){navigator.audioSession.type='playback';}}catch(e){}try{if(navigator.storage&&navigator.storage.persist){navigator.storage.persist();}}catch(e){}var el=null;function go(){try{if(navigator.audioSession){navigator.audioSession.type='playback';}}catch(e){}try{if(!el){el=new Audio('data:audio/wav;base64,UklGRkQDAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YSADAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA==');el.loop=true;el.volume=0.01;el.setAttribute('playsinline','');}var p=el.play();if(p&&p.catch){p.catch(function(){});}}catch(e){}ctxs.forEach(function(c){try{if(c.state!=='running'){c.resume();}}catch(e){}});}['touchend','pointerup','click','keydown'].forEach(function(t){addEventListener(t,go,{capture:true,passive:true});});document.addEventListener('visibilitychange',function(){if(!document.hidden){go();}});})();</script>
 	</head>
@@ -214,7 +212,10 @@ const engine = new Engine(GODOT_CONFIG);
 		}
 	} else {
 		setStatusMode('progress');
+		const desktop = window.matchMedia('(pointer:fine)').matches && !('ontouchstart' in window) && Math.max(screen.width, screen.height) >= 1000;
+		if (desktop) { GODOT_CONFIG.fileSizes['index.desktop.pck'] = 1340625; }
 		engine.startGame({
+			'mainPack': desktop ? 'index.desktop.pck' : 'index.pck',
 			'onProgress': function (current, total) {
 				if (current > 0 && total > 0) {
 					statusProgress.value = current;
